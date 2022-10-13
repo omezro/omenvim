@@ -1,6 +1,7 @@
 
 #### Introduct
 &emsp; nvim ide for golang, 主要针对`go`语言做了一些优化.当然也可以用作`c/c++`,`python`,`rust`等语言的IDE.
+&emsp; 魔改版<根据gonvim配置进行了自定义配置>
 ![预览](./images/dashboard.jpg)
 
 #### 安装
@@ -125,4 +126,4 @@ $ go get -u github.com/cweill/gotests/...
 5 增加nvim-lsp-installer,实现极简一键安装
 6 fature 准备增加nvim-tree的辅助功能快捷方式，比如增加删除文件(夹)
 
-
+ps: 字体采用
