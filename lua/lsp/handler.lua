@@ -1,5 +1,6 @@
 local M = {}
 
+
 vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
@@ -60,7 +61,7 @@ M.setup = function()
 
     local config = {
         virtual_text = {
-            prefix = "◉", -- Could be '●', '▎', 'x', '■'
+            prefix = "◉", -- Could be '●', '▎', 'x', '■' '◉ '
         },
         signs = {
             active = signs,
@@ -82,6 +83,14 @@ M.setup = function()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
+    -- LSP integration
+    vim.lsp.handlers["$/progress"] = require("util.notify").lsp_status_update
+    vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
+        local severity = { "error", "warn", "info", "info", } -- map both hint and info to info?
+        vim.notify(method.message, severity[params.type])
+    end
+
+
 end
 
 
@@ -92,7 +101,7 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", { noremap = true })
     vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", { noremap = true })
-    vim.keymap.set("n", "gf", vim.lsp.buf.formatting, bufopts)
+    --vim.keymap.set("n", "gf", vim.lsp.buf.format, bufopts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 
     -- vim.keymap.set("n", "<space>rn", "<cmd>lua CusLspActionRename.rename()<CR>", bufopts)
@@ -109,7 +118,7 @@ local function lsp_highlight_document(client)
     -- end
 end
 
-function M.on_attach()
+M.on_attach = function()
     return function(client, bufnr)
         -- disable formatting for LSP clients as this is handled by null-ls
         --[[ client.server_capabilities.documentFormattingProvider = false
@@ -121,7 +130,7 @@ function M.on_attach()
     end
 end
 
-function M.capabilities()
+M.capabilities = function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.codeAction = {
         dynamicRegistration = true,

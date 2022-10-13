@@ -1,7 +1,6 @@
 local status_ok, _ = pcall(require, "telescope")
 if not status_ok then
-    --vim.notify("telescope not found!")
-    require("util.notify").notify("cannot load plugin telescope","error","Plugin")
+    require("util.notify").notify("Plugin telescope is not existed", "error", "Plugin")
     return
 end
 
@@ -21,7 +20,7 @@ local function config_telescope(telescope)
             selection_strategy = "reset",
             sorting_strategy = "ascending",
             layout_strategy = "vertical",
-            file_ignore_patterns = { "vendor" },
+            file_ignore_patterns = { "^vendor/", "^target/" },
             layout_config = {
                 prompt_position = "top",
             },

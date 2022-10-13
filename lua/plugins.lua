@@ -235,7 +235,10 @@ return require("packer").startup(function(use)
         end,
     })
     use({
-        "williamboman/nvim-lsp-installer"
+        "williamboman/nvim-lsp-installer",
+        config = function ()
+            require("plug-conf.nvim-lsp-installer")
+        end
     })
 
     ----------------------------------------------------------------
@@ -271,6 +274,9 @@ return require("packer").startup(function(use)
     })
     use({
         "rcarriga/nvim-notify",
+        config = function ()
+            require("plug-conf.notify").setup()
+        end
     })
     use({
         "nvim-telescope/telescope-dap.nvim",
