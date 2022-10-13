@@ -19,7 +19,7 @@ local options = {
     conceallevel = 0, -- so that `` is visible in markdown files
     hlsearch = true, -- highlight all matches on previous search pattern
     ignorecase = true, -- ignore case in search patterns
-    mouse = "n", -- disable mouse completely
+    mouse = "a", -- disable mouse completely
     pumheight = 10, -- pop up menu height
     showmode = false, -- we don't need to see things like -- INSERT -- anymore
     showtabline = 0, -- [0: never show, 1: if has more than 2tabs , 2 : always]
@@ -75,6 +75,14 @@ vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true 
 
 
 vim.cmd([[
+  augroup _fold_bug_solution  " https://github.com/nvim-telescope/telescope.nvim/issues/559
+    autocmd!
+    autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
+  augroup end
+]])
+
+
+vim.cmd([[
     set list                 " hide non-printing characters
     set listchars=             " clear defaults
     set listchars+=tab:\ \ "    " show a small arrow for a tab
@@ -85,15 +93,4 @@ vim.cmd([[
     set showbreak=↪
 ]])
 
-------------------------------------------------
-----      AutoCommands
-------------------------------------------------
-
-vim.cmd([[
-  augroup _fold_bug_solution  " https://github.com/nvim-telescope/telescope.nvim/issues/559
-    autocmd!
-    autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
-  augroup end
-]])
-
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme dracula")

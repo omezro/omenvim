@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, "bufferline")
 if not status_ok then
-    require("utils.notify").notify("Plugin bufferline is not existed", "error", "Plugin")
+    require("util.notify").notify("bufferline not found", "error", "Plugin")
     return
 end
 
@@ -11,7 +11,7 @@ local function config_bufferline(config)
         options = {
             mode = "buffers", -- set to "tabs" to only show tabpages instead
             -- numbers = "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-            numbers = "both",
+            numbers = "ordinal",
             close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
             right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
             left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
@@ -85,20 +85,23 @@ local function config_bufferline(config)
             always_show_bufferline = true,
             -- sort_by = 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function
             sort_by = "insert_after_current",
-            numbers = function(opts)
+            --numbers = function(opts)
                 -- return string.format('%s|%s', opts.id, opts.raise(opts.ordinal))
-                return string.format("%s|%s", opts.ordinal, opts.raise(opts.id))
-            end,
-            left_mouse_command = function(bufnum)
-                require("bufdelete").bufdelete(bufnum, true)
-            end,
+                --return string.format("%s|%s", opts.ordinal, opts.raise(opts.id))
+            --end,
+            --left_mouse_command = function(bufnum)
+                --require("bufdelete").bufdelete(bufnum, true)
+            --end,
         },
     })
 end
 
+
 function M.setup()
-    --[[ local bufferline = require("bufferline")
-    config_bufferline(bufferline) ]]
+    local bufferline = require("bufferline")
+    config_bufferline(bufferline)
 end
 
+
 return M
+

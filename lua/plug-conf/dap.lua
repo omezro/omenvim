@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, "dap")
 if not status_ok then
-    require("utils.notify").notify("Plugin dap is not existed", "error", "Plugin")
+    require("util.notify").notify("Plugin dap is not existed", "error", "Plugin")
     return
 end
 
@@ -46,9 +46,9 @@ local function config_dap(dap, dap_ui)
         vim.cmd("bd! \\[dap-repl]")
     end
 
-    dap.listeners.before['event_progressStart']['progress-notifications']  = require("utils.notify").event_progressStart
-    dap.listeners.before['event_progressUpdate']['progress-notifications'] = require("utils.notify").event_progressUpdate
-    dap.listeners.before['event_progressEnd']['progress-notifications']    = require("utils.notify").event_progressEnd
+    dap.listeners.before['event_progressStart']['progress-notifications']  = require("util.notify").event_progressStart
+    dap.listeners.before['event_progressUpdate']['progress-notifications'] = require("util.notify").event_progressUpdate
+    dap.listeners.before['event_progressEnd']['progress-notifications']    = require("util.notify").event_progressEnd
 
 
     -- config go debuger

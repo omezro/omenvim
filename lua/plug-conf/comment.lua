@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "Comment")
 if not status_ok then
-    require("utils.notify").notify("Plugin Comment is not existed", "error", "Plugin")
+	--vim.notify("Comment not found!")
+    require("util.notify").notify("cannot load plugin Comment","error","Plugin")
 	return
 end
 
@@ -76,11 +77,11 @@ local function config_comment()
 		},
 
 		---Pre-hook, called before commenting the line
-		---@type fun(ctx: CommentCtx):string
+		--- fun(ctx: CommentCtx):string
 		pre_hook = nil,
 
 		---Post-hook, called after commenting is done
-		---@type fun(ctx: CommentCtx)
+		--- fun(ctx: CommentCtx)
 		post_hook = nil,
 	})
 end

@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "nvim-tree")
 if not status_ok then
-    require("utils.notify").notify("Plugin nvim-tree is not existed", "error", "Plugin")
+    --vim.notify("nvim-tree not found!")
+    require("util.notify").notify("cannot load plugin nvim-tree","error","Plugin")
     return
 end
 

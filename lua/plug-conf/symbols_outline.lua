@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "symbols-outline")
 if not status_ok then
-    require("utils.notify").notify("Plugin symbols_outline is not existed", "error", "Plugin")
+    --vim.notify("cannot load plugin symbols-outline")
+    require("util.notify").notify("cannot load plugin symbols-ouline","error","Plugin")
     return
 end
 

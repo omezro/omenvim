@@ -1,6 +1,5 @@
 local M = {}
 
-
 vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
@@ -61,7 +60,7 @@ M.setup = function()
 
     local config = {
         virtual_text = {
-            prefix = "◉", -- Could be '●', '▎', 'x', '■' '◉ '
+            prefix = "◉", -- Could be '●', '▎', 'x', '■'
         },
         signs = {
             active = signs,
@@ -83,14 +82,6 @@ M.setup = function()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-    -- LSP integration
-    vim.lsp.handlers["$/progress"] = require("utils.notify").lsp_status_update
-    vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
-        local severity = { "error", "warn", "info", "info",} -- map both hint and info to info? 
-        vim.notify(method.message, severity[params.type])
-    end
-
-
 end
 
 
@@ -101,7 +92,7 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", { noremap = true })
     vim.keymap.set("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", { noremap = true })
-    vim.keymap.set("n", "gf", vim.lsp.buf.format, bufopts)
+    vim.keymap.set("n", "gf", vim.lsp.buf.formatting, bufopts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 
     -- vim.keymap.set("n", "<space>rn", "<cmd>lua CusLspActionRename.rename()<CR>", bufopts)

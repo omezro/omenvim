@@ -116,4 +116,13 @@ $ go get -u github.com/cweill/gotests/...
 ##### notify显示lsp加载进度
 ![](./images/notify_lsp_status.jpg)
 
+##### ome 补充
+在原有基础上进行了二次配置：
+1 开启鼠标
+2 开启buffline，并修改配置文件
+3 增加dracula theme
+4 修改部分快捷键
+5 增加nvim-lsp-installer,实现极简一键安装
+6 fature 准备增加nvim-tree的辅助功能快捷方式，比如增加删除文件(夹)
+
 

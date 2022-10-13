@@ -13,11 +13,11 @@ local insert = ls.insert_node
 
 local M = {
 
-    snip({ trig = "date", docstring = "Date in the form of YYYY-MM-DD" },
+    snip({ trig = "date", dscr = "Date in the form of YYYY-MM-DD" },
         func(function(_, _, _) return { os.date "%Y-%m-%d" } end, {})
     ),
 
-    snip({ trig = "pwd", docstring = "Path to current working directory" },
+    snip({ trig = "pwd", dscr = "Path to current working directory" },
         func(function(_, _, user_args1)
             local file = io.popen(user_args1, "r")
             local res = {}
@@ -61,8 +61,13 @@ local M = {
             return snip.snippet.env.POSTFIX_MATCH
         end, {})
     }),
+    postfix(".end", {
+        func(function(_, snip)
+            return snip.snippet.env.POSTFIX_MATCH
+        end, {})
+    }),
 
-    snip({ trig = "APACHE", docstring = "Copyright 2021 The l0calh0st Authors" }, {
+    snip({ trig = "APACHE", dscr = "Copyright 2021 The l0calh0st Authors" }, {
         indent_snip(1, { text({
             "/*",
             "Copyright 2022 The l0calh0st Authors.",

@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "which-key")
 if not status_ok then
-    require("utils.notify").notify("Plugin which_key is not existed", "error", "Plugin")
+	--vim.notify("which-key not found!")
+    require("util.notify").notify("cannot load plugin witch-key","error","Plugin")
 	return
 end
 
@@ -55,7 +56,7 @@ function M.setup()
 		["n"] = { "<cmd>NvimTreeToggle<CR>", "DirExploer" },
 		["q"] = { "<cmd>q!<CR>", "Quit" },
 
-		--[[ ["1"] = { "<cmd>lua require('bufferline').go_to_buffer(1, true)<cr>", "tab1" },
+		["1"] = { "<cmd>lua require('bufferline').go_to_buffer(1, true)<cr>", "tab1" },
 		["2"] = { "<cmd>lua require('bufferline').go_to_buffer(2, true)<cr>", "tab2" },
 		["3"] = { "<cmd>lua require('bufferline').go_to_buffer(3, true)<cr>", "tab3" },
 		["4"] = { "<cmd>lua require('bufferline').go_to_buffer(4, true)<cr>", "tab4" },
@@ -64,7 +65,7 @@ function M.setup()
 		["7"] = { "<cmd>lua require('bufferline').go_to_buffer(7, true)<cr>", "tab7" },
 		["8"] = { "<cmd>lua require('bufferline').go_to_buffer(8, true)<cr>", "tab8" },
 		["9"] = { "<cmd>lua require('bufferline').go_to_buffer(9, true)<cr>", "tab9" },
-		["$"] = { "<cmd>lua require('bufferline').go_to_buffer(-1, true)<cr>", "tab$" }, ]]
+		["$"] = { "<cmd>lua require('bufferline').go_to_buffer(-1, true)<cr>", "tab$" },
 
 		-- code runner
 		c = {
@@ -72,6 +73,7 @@ function M.setup()
 			a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "CodeAction" },
 			c = { "<cmd>TroubleToggle<CR>", "Problems" },
 			r = { "<cmd>lua require'sniprun'.run()<cr>", "SnipRun" },
+			f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LspFormat" },
 			t = {},
 		},
 
@@ -95,7 +97,6 @@ function M.setup()
 			d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", "Define" },
 			D = { "<cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>", "TypeDefine" },
 			e = { "<cmd>lua require('telescope.builtin').diagnostics()<cr>", "diagnostics" },
-			f = { "<cmd>lua vim.lsp.buf.format({async=true})<cr>", "LspFormat" },
 			i = { "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", "Interface" },
 			r = { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", "Reference" },
 			s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", "Symbol(doc)" },

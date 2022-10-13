@@ -1,6 +1,6 @@
 local status_ok, ls = pcall(require, "luasnip")
 if not status_ok then
-    require("utils.notify").notify("Plugin luasnip is not existed", "error", "Plugin")
+    require("util.notify").notify("cannot load plugin luasnip","error","Plugin")
     return
 end
 

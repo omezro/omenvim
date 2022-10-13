@@ -1,3 +1,4 @@
+lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 return {
@@ -12,8 +13,6 @@ return {
 			},
 			cargo = {
 				loadOutDirsFromCheck = true,
-                autoreload = true,
-                allFeatures = true,
 			},
 			procMacro = {
 				enable = true,

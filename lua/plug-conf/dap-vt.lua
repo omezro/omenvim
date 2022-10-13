@@ -1,7 +1,7 @@
 -- ------------------------nvim-dap-virtual-text configuration --------------
 local status_ok, config = pcall(require, "nvim-dap-virtual-text")
 if not status_ok then
-    require("utils.notify").notify("Plugin nvim-dap-virtual-text is not existed", "error", "Plugin")
+    require("util.notify").notify("Plugin nvim-dap-virtual is not existed", "error", "Plugin")
     return
 end
 

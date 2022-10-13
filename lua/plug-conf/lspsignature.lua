@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, "lsp_signature")
 if not status_ok then
-    require("utils.notify").notify("Plugin lsp_signature is not existed", "error", "Plugin")
+    require("util.notify").notify("cannot load plugin lsp_signature","error","Plugin")
     return
 end
 
@@ -39,7 +39,7 @@ local function config_lsp_signature(config)
 end
 
 function M.setup()
-    config_lsp_signature(require("lsp_signature"))
+   config_lsp_signature(require("lsp_signature"))
 end
 
 return M

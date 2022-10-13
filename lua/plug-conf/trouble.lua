@@ -1,6 +1,6 @@
 local status_ok, config = pcall(require, "trouble")
 if not status_ok then
-    require("utils.notify").notify("Plugin trouble is not existed", "error", "Plugin")
+    require("util.notify").notify("cannot load plugin trouble","error","Plugin")
 	return
 end
 

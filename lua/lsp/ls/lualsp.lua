@@ -1,5 +1,4 @@
-
-util = require("lspconfig/util")
+local util = require("lspconfig/util")
 
 return {
 	cmd = { "lua-language-server"},

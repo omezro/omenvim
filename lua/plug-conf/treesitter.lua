@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "nvim-treesitter")
 if not status_ok then
-    require("utils.notify").notify("Plugin nvim-treesitter is not existed", "error", "Plugin")
+    --vim.notify("nvim-treesitter not found!")
+    require("util.notify").notify("cannot load plugin nvim-treesitter","error","Plugin")
     return
 end
 
@@ -32,8 +33,6 @@ local function config_nvim_treesitter(config)
         indent = { enable = true, disable = { "" } },
         context_commentstring = {
             enable = true,
-            single_line_comment_string = "auto",
-            multi_line_comment_strings = "auto",
             config = {
                 go = { __default = "// %s", __multiline = "/* %s */" },
                 rust = { __default = "// %s", __multiline = "/* %s */" },

@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "nvim-autopairs")
 if not status_ok then
-    require("utils.notify").notify("nvim-autopairs not found!", "error", "Plugin")
+    --vim.notify("nvim-autopairs not found!")
+    require("util.notify").notify("nvim-autopairs not found!", "error", "Plugin")
     return
 end
 
@@ -38,5 +39,6 @@ function M.setup()
     local autopairs = require("nvim-autopairs")
     config_autopairs(autopairs)
 end
+
 
 return M

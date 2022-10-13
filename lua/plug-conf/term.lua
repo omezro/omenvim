@@ -1,6 +1,7 @@
 local status_ok, config = pcall(require, "toggleterm")
 if not status_ok then
-    require("utils.notify").notify("Plugin toggleterm is not existed", "error", "Plugin")
+	--vim.notify("toggleterm not found!")
+    require("util.notify").notify("cannot load plugin toggleterm","error","Plugin")
 	return
 end
 

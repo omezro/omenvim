@@ -1,8 +1,55 @@
-local M = {}
+local status_ok, _ = pcall(require, "null-ls")
+if not status_ok then
+    require("utils.notify").notify("Plugin null-ls is not existed", "error", "Plugin")
+    return
+end
 
-local null_ls_utils = require("lsp.null-ls.utils")
 
-M["go"] = {
+
+
+local function shell_command_toggle_wrapper(cus_cmd)
+    local __Terminal = require("toggleterm.terminal").Terminal
+    local cmd_termal = __Terminal:new({
+        cmd = cus_cmd .. '&& read -n 1 -s -p "[Press Key to continue]" && exec true',
+        direction = "float",
+        float_opts = {
+            border = "single",
+        }
+    })
+    cmd_termal:toggle()
+end
+
+local code_actions_rust = {
+    method = require("null-ls").methods.CODE_ACTION,
+    filetypes = { "rust" },
+    generator = {
+        fn = function(_)
+            return {
+                {
+                    title = "Cargo Check",
+                    action = function()
+                        shell_command_toggle_wrapper("cargo check")
+                    end
+                },
+                {
+                    title = "Cargo Build",
+                    action = function()
+                        shell_command_toggle_wrapper("cargo build")
+                    end
+                },
+                {
+                    title = "Cargo Run",
+                    action = function()
+                        shell_command_toggle_wrapper("cargo run")
+                    end
+                }
+            }
+        end
+    }
+}
+
+
+local code_actions_golang = {
     method = require("null-ls").methods.CODE_ACTION,
     filetypes = { "go" },
     generator = {
@@ -62,39 +109,15 @@ M["go"] = {
                     end
                 },
                 {
-                    title = "Vendor",
-                    action = function()
-                        null_ls_utils.shell_command_toggle_wrapper("go mod vendor")
+                    title = "GoModVendor",
+                    action = function(_)
+                        shell_command_toggle_wrapper("go mod vendor")
                     end
                 },
                 {
-                    title = "GenTest",
-                    action = function()
-                        vim.ui.select(require("lsp.null-ls.utils").get_current_functions(),
-                            { prompt = "Select Function To Generate Test" }, function(choice)
-                            if not choice then
-                                return
-                            end
-                            local current_file = vim.api.nvim_buf_get_name(0)
-                            local list_pkg
-                            if choice == "ALL  - for all functions" then
-                                list_pkg = io.popen("gotests -all -w " .. current_file):read("*all")
-                            else
-                                list_pkg = io.popen("gotests -only " .. choice .. " -w " .. current_file):read("*all")
-                            end
-                            for line in list_pkg:gmatch("[^\n\r]+") do
-                                if string.find(line, "No tests generated") then
-                                    local go_test_file = string.gsub(current_file, "(%w+).go$", "%1_test.go")
-                                    require("utils.notify").notify(line, "warn", "GenTest")
-                                elseif string.find(line, "Generated Test") then
-                                    local go_test_file = string.gsub(current_file, "(%w+).go$", "%1_test.go")
-                                    vim.cmd("vsplit " .. go_test_file)
-                                    require("utils.notify").notify(line, "info", "GenTest")
-                                else
-                                    require("utils.notify").notify(line, "error", "GenTest")
-                                end
-                            end
-                        end)
+                    title = "GoModTidy",
+                    action = function(_)
+                        shell_command_toggle_wrapper("go mod tidy")
                     end
                 },
             }
@@ -102,34 +125,34 @@ M["go"] = {
     }
 }
 
+local M = {}
 
-M["rust"] = {
-    method = require("null-ls").methods.CODE_ACTION,
-    filetypes = { "rust" },
-    generator = {
-        fn = function(_)
-            return {
-                {
-                    title = "Cargo Check",
-                    action = function()
-                        null_ls_utils.shell_command_toggle_wrapper("cargo check")
-                    end
-                },
-                {
-                    title = "Cargo Build",
-                    action = function()
-                        null_ls_utils.shell_command_toggle_wrapper("cargo build")
-                    end
-                },
-                {
-                    title = "Cargo Run",
-                    action = function()
-                        null_ls_utils.shell_command_toggle_wrapper("cargo run")
-                    end
-                }
-            }
-        end
+local function config_null_ls(null_ls)
+    local opts = {
+        cmd = { "nvim" },
+        debounce = 250,
+        debug = false,
+        default_timeout = 5000,
+        diagnostic_config = nil,
+        diagnostics_format = "#{m}",
+        fallback_severity = vim.diagnostic.severity.ERROR,
+        log_level = "warn",
+        notify_format = "[null-ls] %s",
+        on_attach = nil,
+        on_init = nil,
+        on_exit = nil,
+        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git", "go.mod", "Cargo.toml"),
+        sources = nil,
+        update_in_insert = false,
     }
-}
+    null_ls.setup(opts)
+end
+
+function M.setup()
+    local null_ls = require("null-ls")
+    null_ls.register(code_actions_golang)
+    null_ls.register(code_actions_rust)
+    config_null_ls(null_ls)
+end
 
 return M

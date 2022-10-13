@@ -40,7 +40,7 @@ packer.init({
 ------------------------------------------------
 ----      Packer Manager Plugins
 ------------------------------------------------
-return require("packer").startup(function()
+return require("packer").startup(function(use)
     use("wbthomason/packer.nvim") -- Packer can manage itselfplugin
 
     ------------------------------------------------
@@ -52,12 +52,11 @@ return require("packer").startup(function()
         "rmehri01/onenord.nvim",
         "olimorris/onedarkpro.nvim",
         "EdenEast/nightfox.nvim",
+        "folke/tokyonight.nvim",
+        "Mofiqul/dracula.nvim",
         config = function()
-            require("conf.themes")
+            require("plug-conf.themes")
         end,
-    })
-    use({
-        "rcarriga/nvim-notify",
     })
     use({
         "kyazdani42/nvim-web-devicons",
@@ -69,19 +68,19 @@ return require("packer").startup(function()
         "goolord/alpha-nvim",
         requires = { "kyazdani42/nvim-web-devicons" },
         config = function()
-            require("conf.dashboard")
+            require("plug-conf.dashboard")
         end,
     })
     use({
         "nvim-lualine/lualine.nvim",
         config = function()
-            require("conf.lualine")
+            require("plug-conf.lualine")
         end,
     })
     use({
         "simrat39/symbols-outline.nvim",
         config = function()
-            require("conf.symbols-outline").setup()
+            require("plug-conf.symbols_outline").setup()
         end,
     })
 
@@ -89,21 +88,21 @@ return require("packer").startup(function()
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("conf.trouble").setup()
+            require("plug-conf.trouble").setup()
         end,
     })
 
     use({
         "nvim-treesitter/nvim-treesitter",
         config = function()
-            require("conf.nvim-treesitter").setup()
+            require("plug-conf.treesitter").setup()
         end,
     })
     use({
         "akinsho/bufferline.nvim",
         tag = "v2.*",
         config = function()
-            require("conf.bufferline").setup()
+            require("plug-conf.bufferline").setup()
         end,
         requires = "kyazdani42/nvim-web-devicons",
     })
@@ -115,7 +114,7 @@ return require("packer").startup(function()
         "akinsho/toggleterm.nvim",
         tag = "v2.*",
         config = function()
-            require("conf.toggleterm").setup()
+            require("plug-conf.term").setup()
         end,
     })
 
@@ -126,7 +125,7 @@ return require("packer").startup(function()
         "nvim-telescope/telescope.nvim",
         requires = { "nvim-telescope/telescope-ui-select.nvim" },
         config = function()
-            require("conf.telescope").setup()
+            require("plug-conf.telescope").setup()
         end,
     })
     use({
@@ -146,31 +145,31 @@ return require("packer").startup(function()
     use({
         "kyazdani42/nvim-tree.lua", -- directory browser
         config = function()
-            require("conf.nvim-tree").setup()
+            require("plug-conf.tree").setup()
         end,
     })
 
-    use({
-        "JoosepAlviste/nvim-ts-context-commentstring",
-    })
+    --use({
+        --"JoosepAlviste/nvim-ts-context-commentstring",
+    --})
     use({
         "b3nj5m1n/kommentary",
         config = function()
-            require("conf.kommentary").setup()
+            require("plug-conf.komment").setup()
         end,
     })
 
     use({
         "windwp/nvim-autopairs",
         config = function()
-            require("conf.autopairs").setup()
+            require("plug-conf.autopairs").setup()
         end,
     })
 
     use({
         "stevearc/aerial.nvim",
         config = function()
-            require("conf.aerial").setup()
+            require("plug-conf.aerial").setup()
         end,
     })
 
@@ -178,7 +177,14 @@ return require("packer").startup(function()
         "phaazon/hop.nvim",
         branch = "v2",
         config = function()
-            require("conf.hop").setup()
+            require("plug-conf.hop").setup()
+        end,
+    })
+
+    use({ -- Standalone UI for nvim-lsp progress. Eye candy for the impatient.
+        "j-hui/fidget.nvim",
+        config = function()
+            require("fidget").setup({ timer = { fidget_decay = 500, task_decay = 500, spinner_rate = 125 } })
         end,
     })
 
@@ -188,7 +194,7 @@ return require("packer").startup(function()
     use({
         "hrsh7th/nvim-cmp",
         config = function()
-            require("conf.cmp").setup()
+            require("plug-conf.cmp").setup()
         end,
         requires = {
             { "hrsh7th/cmp-path" }, -- path completion plugin
@@ -198,7 +204,7 @@ return require("packer").startup(function()
             {
                 "L3MON4D3/LuaSnip",
                 config = function()
-                    require("conf.luasnip").setup()
+                    require("plug-conf.luasnip").setup()
                 end,
             },
             { "saadparwaiz1/cmp_luasnip" }, -- completete for snippets
@@ -215,20 +221,17 @@ return require("packer").startup(function()
             "RRethy/vim-illuminate",
         },
         config = function()
-            require("conf.lspconfig").setup()
+            require("plug-conf.lspconfig").setup()
         end,
     })
     use({ -- rust lsp
-        "jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim", },
-        config = function()
-            require("conf.null-ls").setup()
-        end
+        "simrat39/rust-tools.nvim",
+        requires = { "neovim/nvim-lspconfig", ft = "rust" },
     })
     use({ -- lsp_signature
         "ray-x/lsp_signature.nvim",
         config = function()
-            require("conf.lsp_signature").setup()
+            require("plug-conf.lspsignature")
         end,
     })
 
@@ -239,13 +242,13 @@ return require("packer").startup(function()
         "michaelb/sniprun",
         run = "bash ./install.sh",
         config = function()
-            require("conf.sniprun").setup()
+            require("plug-conf.sniprun").setup()
         end,
     })
     use({
         "mfussenegger/nvim-dap",
         config = function()
-            require("conf.dap").setup()
+            require("plug-conf.dap").setup()
         end,
     })
     use({
@@ -253,17 +256,19 @@ return require("packer").startup(function()
         after = "nvim-dap",
         module = "dapui",
         config = function()
-            require("conf.dap-ui").setup()
+            require("plug-conf.dap-ui").setup()
         end,
     })
     use({
         "theHamsta/nvim-dap-virtual-text",
         after = "nvim-dap",
         config = function()
-            require("conf.dap-virtual-text")
+            require("plug-conf.dap-vt")
         end,
     })
-
+    use({
+        "rcarriga/nvim-notify",
+    })
     use({
         "nvim-telescope/telescope-dap.nvim",
         after = { "telescope.nvim", "nvim-dap" },
@@ -285,7 +290,7 @@ return require("packer").startup(function()
             "rouge8/neotest-rust",
         },
         config = function()
-            require("conf.neotest").setup()
+            require("plug-conf.neotest").setup()
         end,
     })
 
@@ -295,7 +300,7 @@ return require("packer").startup(function()
     use({
         "lewis6991/gitsigns.nvim",
         config = function()
-            require("conf.gitsigns").setup()
+            require("plug-conf.gitsigns").setup()
         end,
     })
 
@@ -307,14 +312,14 @@ return require("packer").startup(function()
     use({ -- which key
         "folke/which-key.nvim",
         config = function()
-            require("conf.which-key").setup()
+            require("plug-conf.which-key").setup()
         end,
     })
     -- With the release of Neovim 0.6 we were given the start of extensible core UI hooks
     use({
         "stevearc/dressing.nvim",
         config = function()
-            require("conf.dressigns").setup()
+            require("plug-conf.dressing").setup()
         end,
     })
 
@@ -326,7 +331,14 @@ return require("packer").startup(function()
     use({
         "Akianonymus/nvim-colorizer.lua",
         config = function()
-            require("colorizer").setup()
+            require("plug-conf.colorizer").setup()
+        end
+    })
+    use({ -- rust lsp
+        "jose-elias-alvarez/null-ls.nvim",
+        requires = { "nvim-lua/plenary.nvim", },
+        config = function()
+            require("plug-conf.null-ls").setup()
         end
     })
 

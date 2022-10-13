@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "kommentary")
 if not status_ok then
-    require("utils.notify").notify("Plugin kommentary is not existed", "error", "Plugin")
+    --vim.notify("cannot load plugin kommentary")
+    require("util.notify").notify("cannot load plugin kommentary","error","Plugin")
     return
 end
 

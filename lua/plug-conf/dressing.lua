@@ -1,6 +1,7 @@
 local status_ok, _ = pcall(require, "dressing")
 if not status_ok then
-    require("utils.notify").notify("Plugin dressing is not existed", "error", "Plugin")
+    --vim.notify("cannot load plugin dressing")
+    require("util.notify").notify("cannot load plugin dressing","error","Plugin")
     return
 end
 
@@ -50,7 +51,6 @@ local function config_dressing(config)
                     ["<CR>"] = "Confirm",
                 },
                 i = {
-                    ["<Esc>"] = "HistoryPrev",
                     ["<C-c>"] = "Close",
                     ["<CR>"] = "Confirm",
                     ["<Up>"] = "HistoryPrev",
