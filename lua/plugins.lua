@@ -234,6 +234,9 @@ return require("packer").startup(function(use)
             require("plug-conf.lspsignature")
         end,
     })
+    use({
+        "williamboman/nvim-lsp-installer"
+    })
 
     ----------------------------------------------------------------
     ----      Dap Debugger
