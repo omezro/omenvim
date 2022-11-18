@@ -121,8 +121,8 @@ end
 M.on_attach = function()
     return function(client, bufnr)
         -- disable formatting for LSP clients as this is handled by null-ls
-        --[[ client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false ]]
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
         require("lsp_signature").on_attach()
         vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
         lsp_keymaps(bufnr)
@@ -149,7 +149,7 @@ M.capabilities = function()
     if not status_ok then
         return
     end
-    capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     return capabilities
 
 end

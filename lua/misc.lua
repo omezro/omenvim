@@ -93,4 +93,4 @@ vim.cmd([[
     set showbreak=↪
 ]])
 
-vim.cmd("colorscheme dracula")
+vim.cmd("colorscheme tokyonight")

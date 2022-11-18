@@ -22,7 +22,7 @@ local function config_toggleterm()
 		shell = vim.o.shell,
 		float_opts = {
 			border = "single",
-			winblend = 3,
+			winblend = 0,
 			highlights = {
 				border = "Normal",
 				background = "Normal",
