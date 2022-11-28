@@ -128,3 +128,16 @@ $ go get -u github.com/cweill/gotests/...
 
 &emsp;ps: 字体采用goole字体Recursive,但是由于recusive不支持nerdfont,所以使用fontPatcher patcher了一下 
 &emsp;地址在https://github.com/omigaZ/my-nerd-fonts
+
+
+##### clipboard-provider is a script to handle copying and pasting, Which works with system clipboard, tmux and ssh
+&emsp; mv ~/.config/nvim/clipboard-provider /usr/local/bin/
+
+###### Note:
+&emsp;configuration in tmux
+
+&emsp;set -s set-clipboard external
+&emsp;bind Escape copy-mode                                                              
+&emsp;bind -T copy-mode-vi v send-keys -X begin-selection                                
+&emsp;bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'clipboard-provider copy' 
+&emsp;bind p run "tmux set-buffer \"$(clipboard-provider paste)\"; tmux paste-buffer -p"
