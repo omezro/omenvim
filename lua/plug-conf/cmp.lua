@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, "cmp")
 if not status_ok then
-    require("util.notify").notify("cannot load plugin nvim-cmp","error","Plugin")
+    require("util.notify").notify("cmp not found!", "error", "Plugin")
     return
 end
 local status_luasnip_ok, luasnip = pcall(require, "luasnip")
@@ -16,6 +16,14 @@ local function config_nvim_cmp(config)
         return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
     end
     local cmp_config = {
+        apperance = {
+            menu = {
+                direction = "above"
+            }
+        },
+        view = {
+            -- entries = { name = 'custom', selection_order = 'near_cursor' }
+        },
         preselect = config.PreselectMode.None,
         confirm_opts = {
             behavior = config.ConfirmBehavior.Insert,
@@ -179,3 +187,4 @@ function M.setup()
 end
 
 return M
+

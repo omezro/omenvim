@@ -7,22 +7,25 @@ end
 
 
 local getGitBranchName = function()
-	local branchName = vim.b.gitBranchName or ""
-	local icon = ""
+    local branchName = vim.b.gitBranchName or ""
+	local icon = " "
 
 	if branchName == "master" then
-		icon = ""
+		icon = " "
 	elseif string.find(string.lower(branchName), "fix") then
-		icon = ""
+		icon = " "
 		branchName = branchName:sub(5, -1)
 	elseif string.find(string.lower(branchName), "feat") then
-		icon = ""
+		icon = " "
 		branchName = branchName:sub(6, -1)
 	else
-		icon = ""
+		icon = " "
 	end
-
-	return icon .. " " .. branchName
+	if branchName == "" then
+		return icon
+	else
+		return icon .. " " .. branchName
+	end
 end
 
 

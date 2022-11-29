@@ -94,3 +94,8 @@ vim.cmd([[
 ]])
 
 vim.cmd("colorscheme tokyonight")
+vim.cmd([[
+    let &t_SI.= "<Esc>[6 q"
+    let &t_SR.= "<Esc>[4 q"
+    let &t_EI.= "<Esc>[3 q"
+]])

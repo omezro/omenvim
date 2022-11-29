@@ -26,6 +26,19 @@ return {
             deepCompletion = true, -- If true, this turns on the ability to return completions from deep inside relevant entities, rather than just the locally accessible ones.
             -- experimentalWatchedFileDelay = "10ms"
 
+            ------------------------------------------------
+            ----    Inlayhint 
+            ------------------------------------------------
+            hints = {
+                assignVariableTypes = true, -- i/* int*/, j/* int*/ := 0, len(r)-1
+                compositeLiteralFields = true, -- {/*in: */"Hello, world", /*want: */"dlrow ,olleH"}
+                compositeLiteralTypes = true, -- /*struct{ in string; want string }*/{"Hello, world", "dlrow ,olleH"},
+                constantValues = true, -- KindNone   Kind = iota/* = 0*/
+                functionTypeParameters = true, -- myFoo/*[int, string]*/(1, "hello")
+                parameterNames = true, -- parseInt(/* str: */ "123", /* radix: */ 8)
+                rangeVariableTypes = true, -- for k/* int*/, v/* string*/ := range []string{} {
+            },
+
         },
     },
     single_file_support = true,

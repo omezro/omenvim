@@ -77,10 +77,20 @@ M["go"] = {
                             end
                             local current_file = vim.api.nvim_buf_get_name(0)
                             if choice == "ALL  - for all functions" then
-                                require("utils.notify").notify_execute_command({ "gotests", "-all", "-w", current_file })
+                                require("utils.notify").notify_execute_command({
+                                        "gotests",
+                                        "-all",
+                                        "-w",
+                                        current_file,
+                                    })
                             else
-                                require("utils.notify").notify_execute_command({ "gotests", "-only", choice, "-w",
-                                    current_file })
+                                require("utils.notify").notify_execute_command({
+                                        "gotests",
+                                        "-only",
+                                        choice,
+                                        "-w",
+                                    current_file,
+                                    })
                             end
                         end)
                     end
@@ -98,10 +108,15 @@ M["rust"] = {
         fn = function(_)
             return {
                 {
-                    title = "Cargo Check",
+                    title = "Cargo Add",
                     action = function()
-                        require("utils.notify").notify_execute_command({ "cargo", "check" })
-                    end
+                        local get_features = function () end
+                        vim.ui.input({ prompt = "Add dependencies" }, function (input)
+                            if input == nil then
+                                return 
+                            end
+                        end)
+                    end,
                 },
                 {
                     title = "Cargo Build",
@@ -120,4 +135,4 @@ M["rust"] = {
     }
 }
 
-return 
+return M
