@@ -145,7 +145,9 @@ local function config_null_ls(null_ls)
         sources = {
             null_ls.builtins.formatting.goimports,
             null_ls.builtins.formatting.rustfmt,
-            null_ls.builtins.formatting.clang_format
+            null_ls.builtins.diagnostics.clang_check,
+            --null_ls.builtins.diagnostics.cppcheck,
+            --null_ls.builtins.diagnostics.cpplint
         },
         update_in_insert = false,
     }

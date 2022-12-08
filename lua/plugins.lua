@@ -350,6 +350,14 @@ return require("packer").startup(function(use)
             require("plug-conf.null-ls").setup()
         end
     })
+
+    -------------------------------------------- 
+    --chatGPT 
+    use({
+        'terror/chatgpt.nvim',
+        run = 'pip3 install -r requirements.txt'
+    })
+    -------------------------------------------- 
     --  Automatically set up your configuration after cloning packer.nvim
     if PACKER_BOOTSTRAP then
         require("packer").sync()
