@@ -49,9 +49,9 @@ function M.setup()
 
     local mapping_normal_mode = {
         -- most used functional quick-keys
-        ["~"] = { "<CMD>noh<CR>", "cancel hilght" },
+        ["~"] = { "<cmd>noh<CR>", "cancel hilght" },
         ["!"] = { "<cmd>source ~/.config/nvim/init.lua<CR>", "ReloadConfig" },
-        ["f"] = { "<cmd>lua require'telescope.builtin'.find_files()<cr>", "FindFile" },
+        ["f"] = { "<cmd>lua require'telescope.builtin'.find_files()<CR>", "FindFile" },
         ["n"] = { "<cmd>NvimTreeToggle<CR>", "DirExploer" },
         ["q"] = { "<cmd>q!<CR>", "Quit" },
 
@@ -61,7 +61,7 @@ function M.setup()
             name = "+Code/Lsp",
             a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "CodeAction" },
             c = { "<cmd>TroubleToggle<CR>", "Problems" },
-            r = { "<cmd>lua require'sniprun'.run()<cr>", "SnipRun" },
+            r = { "<cmd>lua require'sniprun'.run()<CR>", "SnipRun" },
             t = {},
         },
 
