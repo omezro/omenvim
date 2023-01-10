@@ -224,3 +224,59 @@ if status_odp then
    })
 end
 
+
+local status_calvera, calvera_config = pcall(require, "calvera-dark")
+if status_calvera then
+    calvera_config.setup({
+        calvera_italic_keywords = false,
+        calvera_borders = true,
+        calvera_contrast = true,
+        calvera_hide_eob = true,
+        calvera_custom_colors = {contrast = "#0f111a"}
+    })
+end
+
+
+local status_onenvim, onenvim_config = pcall(require, "one-nvim")
+if status_onenvim then
+    onenvim_config.setup({
+        one_nvim_transparent_bg = true
+    })
+end
+
+local status_doom, doom_config = pcall(require, "calvera-dark")
+if status_doom then
+    doom_config.setup({
+        -- Add color to cursor
+		doom_one_cursor_coloring = false,
+		-- Set :terminal colors
+		doom_one_terminal_colors = true,
+		-- Enable italic comments
+		doom_one_italic_comments = false,
+		-- Enable TS support
+		doom_one_enable_treesitter = true,
+		-- Color whole diagnostic text or only underline
+        doom_one_diagnostics_text_color = false,
+		-- Enable transparent background
+		doom_one_transparent_background = false,
+
+        -- Pumblend transparency
+		doom_one_pumblend_enable = false,
+		doom_one_pumblend_transparency = 20,
+
+        -- Plugins integration
+		doom_one_plugin_neorg = true,
+		doom_one_plugin_barbar = false,
+		doom_one_plugin_telescope = false,
+		doom_one_plugin_neogit = true,
+		doom_one_plugin_nvim_tree = true,
+	    doom_one_plugin_dashboard = true,
+		doom_one_plugin_startify = true,
+		doom_one_plugin_whichkey = true,
+		doom_one_plugin_indent_blankline = true,
+		doom_one_plugin_vim_illuminate = true,
+		doom_one_plugin_lspsaga = false,
+    })
+end
+
+

@@ -129,7 +129,7 @@ function M.setup()
             f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "FindFile" },
             g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "FindText" },
             t = { "<cmd>lua require('telescope.builtin').treesitter()<cr>", "Treesitter" },
-            u = { "<cmd>lua require('SymbolOutline<cr>", "Outline" },
+            u = { "<cmd>lua require('SymbolOutline')<cr>", "Outline" },
         },
 
         -- unit test

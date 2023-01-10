@@ -54,6 +54,9 @@ return require("packer").startup(function(use)
         "EdenEast/nightfox.nvim",
         "folke/tokyonight.nvim",
         "Mofiqul/dracula.nvim",
+        "yashguptaz/calvera-dark.nvim",
+        "Th3Whit3Wolf/one-nvim",
+        "NTBBloodbath/doom-one.nvim",
         config = function()
             require("plug-conf.themes")
         end,
@@ -143,7 +146,10 @@ return require("packer").startup(function(use)
     ----      Misc Helper Plugins
     ------------------------------------------------
     use({
-        "kyazdani42/nvim-tree.lua", -- directory browser
+        --"kyazdani42/nvim-tree.lua", -- directory browser
+        "nvim-tree/nvim-tree.lua",
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        tag = 'nightly',
         config = function()
             require("plug-conf.tree").setup()
         end,
@@ -351,12 +357,15 @@ return require("packer").startup(function(use)
         end
     })
 
-    -------------------------------------------- 
-    --chatGPT 
     use({
-        'terror/chatgpt.nvim',
-        run = 'pip3 install -r requirements.txt'
+        "karb94/neoscroll.nvim",
+        config = function()
+            require("plug-conf.neoscroll").setup()
+        end
     })
+
+    -------------------------------------------- 
+    -- 
     -------------------------------------------- 
     --  Automatically set up your configuration after cloning packer.nvim
     if PACKER_BOOTSTRAP then
