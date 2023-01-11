@@ -25,11 +25,11 @@ local function config_nvim_treesitter(config)
         -- auto tag with nvim-ts-autotag
         autotag = { enable = true },
         autopairs = { enable = true },
-        highlight = {
-            enable = true,
-            disable = { "" },
-            additional_vim_regex_higlighting = true,
-        },
+        --highlight = {
+          --  enable = true,
+            --disable = { "" },
+            --additional_vim_regex_higlighting = true,
+        --},
         indent = { enable = true, disable = { "" } },
         context_commentstring = {
             enable = true,
@@ -48,6 +48,7 @@ local function config_nvim_treesitter(config)
 end
 
 function M.setup()
+    -- do config
     config_nvim_treesitter(require("nvim-treesitter.configs"))
 end
 
