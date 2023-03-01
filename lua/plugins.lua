@@ -55,6 +55,10 @@ return require("packer").startup(function(use)
         "folke/tokyonight.nvim",
         "Mofiqul/dracula.nvim",
         "catppuccin/nvim", as = "catppuccin",
+        "projekt0n/github-nvim-theme",
+        "yashguptaz/calvera-dark.nvim",
+        "Th3Whit3Wolf/one-nvim",
+        "NTBBloodbath/doom-one.nvim",
         config = function()
             require("plug-conf.themes")
         end,
