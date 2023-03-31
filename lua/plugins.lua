@@ -142,6 +142,12 @@ return require("packer").startup(function(use)
             require("telescope").load_extension("fzf")
         end,
     })
+    use({
+		"gen740/SmoothCursor.nvim",
+		config = function()
+			require("plug-conf.smoothcursor").setup()
+		end,
+	})
 
 
     ------------------------------------------------

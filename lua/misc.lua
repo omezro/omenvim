@@ -93,7 +93,7 @@ vim.cmd([[
     set showbreak=↪
 ]])
 
-vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme kanagawa")
 
 vim.cmd([[
     let &t_SI.= "<Esc>[6 q"
