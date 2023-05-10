@@ -286,8 +286,8 @@ github.setup({
     variable_style = "italic",
     sidebars = {"qf", "vista_kind", "terminal", "packer"},
 
-    -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-    colors = {hint = "orange", error = "#ff0000"},
+    -- Change the "hint" color to the "orange" color, and make the "error" color bright #FF5555
+    colors = {hint = "orange", error = "#FF5555"},
 
     -- Overwrite the highlight groups
     overrides = function(c)

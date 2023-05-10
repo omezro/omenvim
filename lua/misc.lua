@@ -31,7 +31,7 @@ local options = {
     undofile = true, -- enable persistent undo
     expandtab = true, -- convert tabs to spaces
     shiftwidth = 4, -- the number of spaces inserted for each indentation
-    tabstop = 4, -- insert 2 spaces for a tab
+    softtabstop = 4, -- insert 2 spaces for a tab
     cursorline = true, -- highlight the current line
     cursorcolumn = false, -- cursor column.
     number = true, -- set numbered lines
@@ -87,13 +87,13 @@ vim.cmd([[
     set listchars=             " clear defaults
     set listchars+=tab:\ \ "    " show a small arrow for a tab
     set listchars+=nbsp:␣      " show a small open box for non-breaking spaces
-    " set listchars+=precedes:«  " show a small double-chevron for text to the left
-    " set listchars+=extends:»   " show a small double-chevron for text to the right
-    " set listchars+=eol:⏎        " show newline symbol at the end of a line
+    set listchars+=precedes:«  " show a small double-chevron for text to the left
+    set listchars+=extends:»   " show a small double-chevron for text to the right
+    set listchars+=eol:⏎        " show newline symbol at the end of a line
     set showbreak=↪
 ]])
 
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme catppuccin")
 
 vim.cmd([[
     let &t_SI.= "<Esc>[6 q"
